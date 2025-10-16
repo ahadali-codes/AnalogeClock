@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neon Analog Clock</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Animated Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Clock -->
+      <div class="clock-container">
+        <div class="clock-border"></div>
+        <div class="clock-face" id="clockFace">
+          <!-- Hour numbers and tick marks will be added by JavaScript -->
+          <!-- Clock hands -->
+          <div class="hand hour-hand" id="hourHand"></div>
+          <div class="hand minute-hand" id="minuteHand"></div>
+          <div class="hand second-hand" id="secondHand"></div>
+          <div class="center-pivot"></div>
+        </div>
+      </div>
+
+      <!-- Digital Time Display -->
+      <div class="digital-display">
+        <div class="time" id="digitalTime">00:00:00</div>
+        <div class="date" id="digitalDate">Monday, January 1, 2023</div>
+      </div>
+
+      <!-- Theme Options -->
+      <div class="theme-options">
+        <button class="theme-btn active" data-theme="default">Default</button>
+        <button class="theme-btn" data-theme="purple">Purple</button>
+        <button class="theme-btn" data-theme="cyan">Cyan</button>
+        <button class="theme-btn" data-theme="amber">Amber</button>
+      </div>
+    </div>
+    <script src="./scripts.js"></script>
+  </body>
+</html>

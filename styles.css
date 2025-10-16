@@ -1,0 +1,335 @@
+/* CSS Variables for Theme */
+:root {
+  --primary-bg: #0f2027;
+  --clock-bg: linear-gradient(145deg, #0f2027, #1a2e35);
+  --clock-border: linear-gradient(145deg, #2c5364, #203a43, #0f2027);
+  --second-hand: #00ffff;
+  --minute-hand: #e0e0e0;
+  --hour-hand: #9b59b6;
+  --text-color: #e0e0e0;
+  --glow-color: rgba(0, 255, 255, 0.7);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] {
+  --primary-bg: #f0f8ff;
+  --clock-bg: linear-gradient(145deg, #f0f8ff, #e6f3ff);
+  --clock-border: linear-gradient(145deg, #a8d8ff, #7bc8ff, #4ab3ff);
+  --second-hand: #ff3366;
+  --minute-hand: #333333;
+  --hour-hand: #663399;
+  --text-color: #333333;
+  --glow-color: rgba(255, 51, 102, 0.7);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--primary-bg);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.5s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Animated Background Particles */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  animation: float 15s infinite linear;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Main Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Clock Container */
+.clock-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .clock-container {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+/* Clock Face */
+.clock-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--clock-bg);
+  box-shadow: 0 0 25px var(--shadow-color), inset 0 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulse 4s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 25px var(--shadow-color), inset 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 35px var(--shadow-color), 0 0 15px var(--glow-color),
+      inset 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Clock Border */
+.clock-border {
+  position: absolute;
+  width: 105%;
+  height: 105%;
+  border-radius: 50%;
+  background: var(--clock-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  animation: rotate 20s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hour Numbers */
+.hour-number {
+  position: absolute;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-shadow: 0 0 5px var(--glow-color);
+  transform-origin: center;
+}
+
+/* Tick Marks */
+.tick {
+  position: absolute;
+  width: 2px;
+  height: 12px;
+  background: var(--text-color);
+  transform-origin: bottom center;
+}
+
+.tick.main {
+  height: 18px;
+  background: var(--hour-hand);
+  width: 3px;
+}
+
+/* Clock Hands */
+.hand {
+  position: absolute;
+  bottom: 50%;
+  transform-origin: bottom center;
+  border-radius: 5px 5px 0 0;
+  z-index: 10;
+  transition: transform 0.05s cubic-bezier(0.4, 2.3, 0.8, 1);
+}
+
+.hour-hand {
+  width: 6px;
+  height: 30%;
+  background: var(--hour-hand);
+  box-shadow: 0 0 10px var(--hour-hand);
+}
+
+.minute-hand {
+  width: 4px;
+  height: 40%;
+  background: var(--minute-hand);
+  box-shadow: 0 0 8px var(--minute-hand);
+}
+
+.second-hand {
+  width: 2px;
+  height: 45%;
+  background: var(--second-hand);
+  box-shadow: 0 0 5px var(--second-hand);
+}
+
+/* Center Pivot */
+.center-pivot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--second-hand);
+  border-radius: 50%;
+  z-index: 11;
+  box-shadow: 0 0 15px var(--second-hand);
+  animation: pulse-center 2s infinite;
+}
+
+@keyframes pulse-center {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px var(--second-hand);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px var(--second-hand);
+  }
+}
+
+/* Digital Time & Date */
+.digital-display {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.time {
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px var(--glow-color);
+}
+
+.date {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: transparent;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--glow-color);
+}
+
+/* Neon Theme Options */
+.theme-options {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.theme-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--text-color);
+  background: transparent;
+  color: var(--text-color);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.theme-btn.active {
+  background: var(--text-color);
+  color: var(--primary-bg);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .clock-container {
+    width: 250px;
+    height: 250px;
+  }
+
+  .time {
+    font-size: 2rem;
+  }
+
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
